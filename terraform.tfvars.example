@@ -1,5 +1,5 @@
 hostname = ""
-oauth_token = ""
+github_oauth_token = ""
 organization = "hashicorp"
 workspace_count = "12"
 branch = "master"
