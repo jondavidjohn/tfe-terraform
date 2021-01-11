@@ -3,9 +3,15 @@
 Clone this repo to your local machine.
 
 ## Setup Vars
-```
+```sh
 cp terraform.tfvars.example terraform.tfvars
 ```
+
+You may want to customize the fields to your liking, e.g.:
+pointing to your repo, working directory, etc.
+
+It might also behoove you to edit main.tf as well, e.g.:
+changing the workspace name, number of created workspaces, etc.
 
 ### Oauth Token
 Go to github and create a [personal access token](https://github.com/settings/tokens/new)
@@ -18,6 +24,17 @@ rake tfe:local:info
 ```
 Use the hostname portion of the url returned in the above command as your
 `hostname` value in `terraform.tfvars`.
+
+### Api Token
+In TFE UI go to User Settings -> Tokens and create a new API token.
+This will go into your ~/.terraformrc file:
+
+```sh
+# tfe:local
+credentials "tfe-zone-***.ngrok.io" {
+  token = "<TFC-ADMIN-TOKEN>"
+}
+```
 
 
 ## Usage
