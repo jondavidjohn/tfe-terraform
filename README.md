@@ -10,7 +10,7 @@ cp terraform.tfvars.example terraform.tfvars
 You may want to customize the fields to your liking, e.g.:
 pointing to your repo, working directory, etc.
 
-It might also behoove you to edit main.tf as well, e.g.:
+It might also behoove you to edit `main.tf` as well, e.g.:
 change around the different resources you need or expect.
 
 ### Oauth Token
