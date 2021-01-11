@@ -6,11 +6,7 @@ variable "github_oauth_token" {
   type = string
 }
 
-variable "organization" {
-  type = string
-}
-
-variable "workspace_count" {
+variable "user_email" {
   type = string
 }
 
