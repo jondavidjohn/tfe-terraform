@@ -22,10 +22,10 @@ with the `repo` and `admin:repo_hook` scopes. Use this generated value for your
 ```
 rake tfe:local:info
 ```
-Use the hostname portion of the url returned in the above command as your
+Use the hostname portion (removing the `https://` etc..) of the url returned in the above command as your
 `hostname` value in `terraform.tfvars`.
 
-### Admin API Token
+### TFC Admin API Token
 In TFE UI go to User Settings -> Tokens and create a new API token.
 This will go into your ~/.terraformrc file:
 
