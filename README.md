@@ -11,7 +11,7 @@ You may want to customize the fields to your liking, e.g.:
 pointing to your repo, working directory, etc.
 
 It might also behoove you to edit main.tf as well, e.g.:
-changing the workspace name, number of created workspaces, etc.
+change around the different resources you need or expect.
 
 ### Oauth Token
 Go to github and create a [personal access token](https://github.com/settings/tokens/new)
@@ -25,7 +25,7 @@ rake tfe:local:info
 Use the hostname portion of the url returned in the above command as your
 `hostname` value in `terraform.tfvars`.
 
-### Api Token
+### Admin API Token
 In TFE UI go to User Settings -> Tokens and create a new API token.
 This will go into your ~/.terraformrc file:
 
@@ -36,15 +36,4 @@ credentials "tfe-zone-***.ngrok.io" {
 }
 ```
 
-
-## Usage
-After nuking, you will need to create a new API token in the TFE UI and set it
-up properly with a [terraform credentials file](https://www.terraform.io/docs/commands/cli-config.html#available-settings). In the future, we may be able
-to write a script to handle this automatically.
-
-I personally setup branches for each environment I regularly use like:
-* prod/duckduck
-* prod/duckduck-with-queue-manager
-* oasis/duckduck
-* local/duckduck
-* ...
+This is used by the terraform provider to authenticate.
