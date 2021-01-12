@@ -36,4 +36,4 @@ credentials "tfe-zone-***.ngrok.io" {
 }
 ```
 
-This is used by the terraform provider to authenticate.
+This is used by the [terraform provider](https://github.com/hashicorp/terraform-provider-tfe) to authenticate.
