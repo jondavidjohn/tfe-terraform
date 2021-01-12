@@ -36,4 +36,26 @@ credentials "tfe-zone-***.ngrok.io" {
 }
 ```
 
-This is used by the [terraform provider](https://github.com/hashicorp/terraform-provider-tfe) to authenticate.
+This is used by the [terraform provider][terraform-provider] to authenticate.
+
+## Planning and Applying
+
+### Admin Email
+
+Since the organization "hashicorp" is being used by default in `main.tf` the admin e-mail needs to stay `admin@hashicorp.com` despite it being used against your own tfe:local instance.
+
+### Mass Team Creation
+
+Since the teams are being iterated through further along in the configuration file the teams resource needs to be created first.
+Fortunately this is easily possible by using terraform's [`-target` flag][target-flag]:
+
+```sh
+terraform apply -target=tfe_team.visible_team
+```
+
+Then a normal `terraform apply` can be executed after.
+
+
+<!-- Reflinks -->
+[target-flag]:https://www.terraform.io/docs/commands/plan.html#resource-targeting
+[terraform-provider]:https://github.com/hashicorp/terraform-provider-tfe
