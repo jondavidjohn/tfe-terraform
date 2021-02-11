@@ -36,7 +36,7 @@ resource "tfe_workspace" "workspace" {
 }
 
 resource "tfe_team" "visible_team" {
-  count        = 15
+  count        = 50
   name         = "team-${count.index}"
   organization = "hashicorp"
   visibility   = "organization"
@@ -47,12 +47,12 @@ resource "tfe_team" "secret_team" {
   organization = "hashicorp"
 }
 
-resource "tfe_team_access" "team_workspace_access" {
-  for_each     = toset([for team in tfe_team.visible_team : team.id])
-  team_id      = each.value
-  access       = "read"
-  workspace_id = tfe_workspace.workspace.id
-}
+//resource "tfe_team_access" "team_workspace_access" {
+//  for_each     = toset([for team in tfe_team.visible_team : team.id])
+//  team_id      = each.value
+//  access       = "read"
+//  workspace_id = tfe_workspace.workspace.id
+//}
 
 resource "tfe_team_access" "secret_team_workspace_access" {
   access       = "read"
