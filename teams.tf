@@ -38,13 +38,13 @@ resource "tfe_team_access" "secret_team_workspace_access" {
 }
 
 resource "tfe_team_organization_member" "visible_team_user_membership" {
-  for_each                   = toset([for team in tfe_team.visible_team : team.id])
+  for_each                   = toset([for team in tfe_team.visible_teams : team.id])
   team_id                    = each.value
   organization_membership_id = data.tfe_organization_membership.user.id
 }
 
 resource "tfe_team_organization_member" "visible_team_admin_membership" {
-  for_each                   = toset([for team in tfe_team.visible_team : team.id])
+  for_each                   = toset([for team in tfe_team.visible_teams : team.id])
   team_id                    = each.value
   organization_membership_id = data.tfe_organization_membership.admin.id
 }
