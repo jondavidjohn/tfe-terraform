@@ -37,3 +37,16 @@ credentials "tfe-zone-***.ngrok.io" {
 ```
 
 This is used by the terraform provider to authenticate.
+
+## First Run!
+
+Because these configurations use `for_each`, we need to target a few of these collections with our first apply.
+
+```
+terraform apply \
+  -target=tfe_team.visible_teams \
+  -target=tfe_workspace.run_triggering_workspaces \
+  -target=tfe_workspace.run_triggered_workspaces
+```
+
+Once this completes, you can proceed to a normal `terraform apply` workflow.
