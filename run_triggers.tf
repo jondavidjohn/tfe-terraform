@@ -107,6 +107,11 @@ resource "tfe_workspace" "long_name_workspace" {
   }
 }
 
+resource "tfe_run_trigger" "run_trigger_long_name" {
+  sourceable_id = tfe_workspace.run_triggers_workspace.id
+  workspace_id  = tfe_workspace.long_name_workspace.id
+}
+
 resource "tfe_run_trigger" "run_trigger_both_a" {
   for_each      = local.triggereds
   sourceable_id = each.value
@@ -117,9 +122,4 @@ resource "tfe_run_trigger" "run_trigger_both_b" {
   for_each      = local.triggerings
   sourceable_id = tfe_workspace.run_triggers_workspace.id
   workspace_id  = each.value
-}
-
-resource "tfe_run_trigger" "run_trigger_long_name" {
-  sourceable_id = tfe_workspace.run_triggers_workspace.id
-  workspace_id  = tfe_workspace.long_name_workspace.id
 }
