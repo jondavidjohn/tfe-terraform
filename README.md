@@ -46,7 +46,8 @@ Because these configurations use `for_each`, we need to target a few of these co
 terraform apply \
   -target=tfe_team.visible_teams \
   -target=tfe_workspace.run_triggering_workspaces \
-  -target=tfe_workspace.run_triggered_workspaces
+  -target=tfe_workspace.run_triggered_workspaces \
+  -auto-approve
 ```
 
 Once this completes, you can proceed to a normal `terraform apply` workflow.
