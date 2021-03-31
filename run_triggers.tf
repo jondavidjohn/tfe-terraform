@@ -93,6 +93,20 @@ resource "tfe_workspace" "run_triggers_workspace" {
   }
 }
 
+resource "tfe_workspace" "long_name_workspace" {
+  organization      = "hashicorp"
+  name              = "this-is-an-unreasonbly-long-workspace-name-that-has-enough-characters-to-truncate"
+  auto_apply        = true
+  queue_all_runs    = true
+  working_directory = var.working_directory
+
+  vcs_repo {
+    identifier     = var.repo
+    branch         = var.branch
+    oauth_token_id = tfe_oauth_client.oauth.oauth_token_id
+  }
+}
+
 resource "tfe_run_trigger" "run_trigger_both_a" {
   for_each      = local.triggereds
   sourceable_id = each.value
@@ -103,4 +117,9 @@ resource "tfe_run_trigger" "run_trigger_both_b" {
   for_each      = local.triggerings
   sourceable_id = tfe_workspace.run_triggers_workspace.id
   workspace_id  = each.value
+}
+
+resource "tfe_run_trigger" "run_trigger_long_name" {
+  sourceable_id = tfe_workspace.run_triggers_workspace.id
+  workspace_id  = tfe_workspace.long_name_workspace.id
 }
