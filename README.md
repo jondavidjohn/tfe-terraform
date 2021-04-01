@@ -27,7 +27,7 @@ Use the hostname portion (removing the `https://` etc..) of the url returned in 
 
 ### TFC Admin API Token
 
-First, login to your local TFC as the admin user (username: `admin`) and generate a API token.  You can find these under *User Settings -> Tokens*
+First, login to your local TFC as the admin user (username: `admin`) and generate an API token.  You can find these under *User Settings -> Tokens*
 
 This will go into your ~/.terraformrc file:
 
