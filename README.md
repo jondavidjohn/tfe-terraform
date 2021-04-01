@@ -26,7 +26,9 @@ Use the hostname portion (removing the `https://` etc..) of the url returned in 
 `hostname` value in `terraform.tfvars`.
 
 ### TFC Admin API Token
-In TFE UI go to User Settings -> Tokens and create a new API token.
+
+First, login to your local TFC as the admin user (username: `admin`) and generate a API token.  You can find these under *User Settings -> Tokens*
+
 This will go into your ~/.terraformrc file:
 
 ```sh
