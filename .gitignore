@@ -1,4 +1,5 @@
 /.terraform
+oasis.tfvars
 default.tfvars
 *.tfstate
 *.tfstate.backup

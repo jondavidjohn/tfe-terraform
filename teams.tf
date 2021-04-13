@@ -1,5 +1,5 @@
 resource "tfe_workspace" "teams_workspace" {
-  organization      = "hashicorp"
+  organization      = var.organization_name
   name              = "teams"
   auto_apply        = true
   queue_all_runs    = true
@@ -15,13 +15,13 @@ resource "tfe_workspace" "teams_workspace" {
 resource "tfe_team" "visible_teams" {
   count        = 50
   name         = "team-${count.index}"
-  organization = "hashicorp"
+  organization = var.organization_name
   visibility   = "organization"
 }
 
 resource "tfe_team" "secret_team" {
   name         = "secret-team"
-  organization = "hashicorp"
+  organization = var.organization_name
 }
 
 resource "tfe_team_access" "team_workspace_access" {
@@ -43,13 +43,7 @@ resource "tfe_team_organization_member" "visible_team_user_membership" {
   organization_membership_id = data.tfe_organization_membership.user.id
 }
 
-resource "tfe_team_organization_member" "visible_team_admin_membership" {
-  for_each                   = toset([for team in tfe_team.visible_teams : team.id])
-  team_id                    = each.value
-  organization_membership_id = data.tfe_organization_membership.admin.id
-}
-
-resource "tfe_team_organization_member" "secret_team_admin_membership" {
+resource "tfe_team_organization_member" "secret_team_user_membership" {
   team_id                    = tfe_team.secret_team.id
-  organization_membership_id = data.tfe_organization_membership.admin.id
+  organization_membership_id = data.tfe_organization_membership.user.id
 }

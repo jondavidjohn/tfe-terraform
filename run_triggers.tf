@@ -6,7 +6,7 @@ locals {
 # --- Sets up the "run-triggered" workspace where we only have other workspaces triggering runs
 
 resource "tfe_workspace" "run_triggered_workspace" {
-  organization      = "hashicorp"
+  organization      = var.organization_name
   name              = "run-triggered"
   auto_apply        = true
   queue_all_runs    = true
@@ -21,7 +21,7 @@ resource "tfe_workspace" "run_triggered_workspace" {
 
 resource "tfe_workspace" "run_triggering_workspaces" {
   count = 16
-  organization      = "hashicorp"
+  organization      = var.organization_name
   name              = "run-triggerings-${count.index}"
   auto_apply        = true
   queue_all_runs    = true
@@ -43,7 +43,7 @@ resource "tfe_run_trigger" "run_trigger_triggered" {
 # --- Sets up the "run-triggering" workspace where we only are triggering other workspaces
 
 resource "tfe_workspace" "run_triggering_workspace" {
-  organization      = "hashicorp"
+  organization      = var.organization_name
   name              = "run-triggering"
   auto_apply        = true
   queue_all_runs    = true
@@ -58,7 +58,7 @@ resource "tfe_workspace" "run_triggering_workspace" {
 
 resource "tfe_workspace" "run_triggered_workspaces" {
   count = 16
-  organization      = "hashicorp"
+  organization      = var.organization_name
   name              = "run-triggereds-${count.index}"
   auto_apply        = true
   queue_all_runs    = true
@@ -80,7 +80,7 @@ resource "tfe_run_trigger" "run_trigger_triggering" {
 # --- Sets up the "run-triggers" workspace where we have both inbound and outbound triggers.
 
 resource "tfe_workspace" "run_triggers_workspace" {
-  organization      = "hashicorp"
+  organization      = var.organization_name
   name              = "run-triggers"
   auto_apply        = true
   queue_all_runs    = true
@@ -94,7 +94,7 @@ resource "tfe_workspace" "run_triggers_workspace" {
 }
 
 resource "tfe_workspace" "long_name_workspace" {
-  organization      = "hashicorp"
+  organization      = var.organization_name
   name              = "this-is-an-unreasonbly-long-workspace-name-that-has-enough-characters-to-truncate"
   auto_apply        = true
   queue_all_runs    = true

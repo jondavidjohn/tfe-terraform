@@ -2,6 +2,10 @@ variable "hostname" {
   type = string
 }
 
+variable "organization_name" {
+  type = string
+}
+
 variable "github_oauth_token" {
   type = string
 }

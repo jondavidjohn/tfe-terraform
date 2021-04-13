@@ -25,9 +25,11 @@ rake tfe:local:info
 Use the hostname portion (removing the `https://` etc..) of the url returned in the above command as your
 `hostname` value in `terraform.tfvars`.
 
-### TFC Admin API Token
+### TFC API Token
 
-First, login to your local TFC as the admin user (username: `admin`) and generate an API token.  You can find these under *User Settings -> Tokens*
+In the TFC UI go to your User Settings -> Tokens and create a new API token.
+
+(The user this token belongs to should correspond with the specified user email in your `tfvars` file.)
 
 This will go into your ~/.terraformrc file:
 
@@ -38,7 +40,7 @@ credentials "tfe-zone-***.ngrok.io" {
 }
 ```
 
-This is used by the terraform provider to authenticate.
+This is used by the terraform provider to authenticate, and all resources will be created by this user.
 
 ## First Run!
 
@@ -53,3 +55,44 @@ terraform apply \
 ```
 
 Once this completes, you can proceed to a normal `terraform apply` workflow.
+
+## Using it in other environments
+
+If you want to use the configuration you have created in other environments, you should use [terraform workspaces](https://www.terraform.io/docs/language/state/workspaces.html).
+
+The simple way to get started with this is to create a new workspace
+
+```sh
+terraform workspace new oasis
+```
+
+Copy your existing `tfvars` file and update the `hostname` and `organization_name` (this organization must already be created).  I generally call my original `default.tfvars` and the new one `oasis.tfvars`.
+
+Your new workspace provides a way to maintain state for a new environment separate from your existing usage with `tfe:local`.
+
+So you should now be able to start fresh against staging.  The only caveat is now that you have multiple `tfvars` files, you must specify which one you want to use.
+
+For example, with our first run:
+
+```
+terraform apply \
+  -target=tfe_team.visible_teams \
+  -target=tfe_workspace.run_triggering_workspaces \
+  -target=tfe_workspace.run_triggered_workspaces \
+  -var-file="oasis.tfvars"
+```
+
+And then
+
+```
+terraform apply -var-file="oasis.tfvars"
+```
+
+### Switching between workspaces
+
+To switch back to your `tfe:local` workspace (default)
+
+```
+terraform workspace select default
+terraform apply -var-file="default.tfvars"
+```
