@@ -20,7 +20,7 @@ resource "tfe_workspace" "run_triggered_workspace" {
 }
 
 resource "tfe_workspace" "run_triggering_workspaces" {
-  count = 6
+  count = 16
   organization      = "hashicorp"
   name              = "run-triggerings-${count.index}"
   auto_apply        = true
@@ -57,7 +57,7 @@ resource "tfe_workspace" "run_triggering_workspace" {
 }
 
 resource "tfe_workspace" "run_triggered_workspaces" {
-  count = 6
+  count = 16
   organization      = "hashicorp"
   name              = "run-triggereds-${count.index}"
   auto_apply        = true
