@@ -4,7 +4,7 @@ Clone this repo to your local machine.
 
 ## Setup Vars
 ```sh
-cp terraform.tfvars.example terraform.tfvars
+cp terraform.tfvars.example default.tfvars
 ```
 
 You may want to customize the fields to your liking, e.g.:
@@ -66,9 +66,9 @@ The simple way to get started with this is to create a new workspace
 terraform workspace new oasis
 ```
 
-Copy your existing `tfvars` file and update the `hostname` and `organization_name` (this organization must already be created).  I generally call my original `default.tfvars` and the new one `oasis.tfvars`.
+Copy your existing `tfvars` file and update the `hostname` and `organization_name` (this organization must already be created).  In my case, I called the new one `oasis.tfvars`.
 
-Your new workspace provides a way to maintain state for a new environment separate from your existing usage with `tfe:local`.
+Your new workspace provides a way to maintain state for a new environment separate from your existing usage against `tfe:local`.
 
 So you should now be able to start fresh against staging.  The only caveat is now that you have multiple `tfvars` files, you must specify which one you want to use.
 
