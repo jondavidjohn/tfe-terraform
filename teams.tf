@@ -1,15 +1,6 @@
 resource "tfe_workspace" "teams_workspace" {
   organization      = var.organization_name
   name              = "teams"
-  auto_apply        = true
-  queue_all_runs    = true
-  working_directory = var.working_directory
-
-  vcs_repo {
-    identifier     = var.repo
-    branch         = var.branch
-    oauth_token_id = tfe_oauth_client.oauth.oauth_token_id
-  }
 }
 
 resource "tfe_team" "visible_teams" {

@@ -8,30 +8,12 @@ locals {
 resource "tfe_workspace" "run_triggered_workspace" {
   organization      = var.organization_name
   name              = "run-triggered"
-  auto_apply        = true
-  queue_all_runs    = true
-  working_directory = var.working_directory
-
-  vcs_repo {
-    identifier     = var.repo
-    branch         = var.branch
-    oauth_token_id = tfe_oauth_client.oauth.oauth_token_id
-  }
 }
 
 resource "tfe_workspace" "run_triggering_workspaces" {
   count = 16
   organization      = var.organization_name
   name              = "run-triggerings-${count.index}"
-  auto_apply        = true
-  queue_all_runs    = true
-  working_directory = var.working_directory
-
-  vcs_repo {
-    identifier     = var.repo
-    branch         = var.branch
-    oauth_token_id = tfe_oauth_client.oauth.oauth_token_id
-  }
 }
 
 resource "tfe_run_trigger" "run_trigger_triggered" {
@@ -45,30 +27,12 @@ resource "tfe_run_trigger" "run_trigger_triggered" {
 resource "tfe_workspace" "run_triggering_workspace" {
   organization      = var.organization_name
   name              = "run-triggering"
-  auto_apply        = true
-  queue_all_runs    = true
-  working_directory = var.working_directory
-
-  vcs_repo {
-    identifier     = var.repo
-    branch         = var.branch
-    oauth_token_id = tfe_oauth_client.oauth.oauth_token_id
-  }
 }
 
 resource "tfe_workspace" "run_triggered_workspaces" {
   count = 16
   organization      = var.organization_name
   name              = "run-triggereds-${count.index}"
-  auto_apply        = true
-  queue_all_runs    = true
-  working_directory = var.working_directory
-
-  vcs_repo {
-    identifier     = var.repo
-    branch         = var.branch
-    oauth_token_id = tfe_oauth_client.oauth.oauth_token_id
-  }
 }
 
 resource "tfe_run_trigger" "run_trigger_triggering" {
@@ -82,29 +46,11 @@ resource "tfe_run_trigger" "run_trigger_triggering" {
 resource "tfe_workspace" "run_triggers_workspace" {
   organization      = var.organization_name
   name              = "run-triggers"
-  auto_apply        = true
-  queue_all_runs    = true
-  working_directory = var.working_directory
-
-  vcs_repo {
-    identifier     = var.repo
-    branch         = var.branch
-    oauth_token_id = tfe_oauth_client.oauth.oauth_token_id
-  }
 }
 
 resource "tfe_workspace" "long_name_workspace" {
   organization      = var.organization_name
   name              = "this-is-an-unreasonbly-long-workspace-name-that-has-enough-characters-to-truncate"
-  auto_apply        = true
-  queue_all_runs    = true
-  working_directory = var.working_directory
-
-  vcs_repo {
-    identifier     = var.repo
-    branch         = var.branch
-    oauth_token_id = tfe_oauth_client.oauth.oauth_token_id
-  }
 }
 
 resource "tfe_run_trigger" "run_trigger_long_name" {
