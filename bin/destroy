@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-terraform workspace select $1
-terraform destroy -var-file=$1.tfvars
+environment=${1:-default}
+
+terraform workspace select $environment
+terraform destroy -var-file=$environment.tfvars
 terraform workspace select default
