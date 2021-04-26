@@ -42,19 +42,19 @@ credentials "tfe-zone-***.ngrok.io" {
 
 This is used by the terraform provider to authenticate, and all resources will be created by this user.
 
-## First Run!
+## Helper scripts
 
-Because these configurations use `for_each`, we need to target a few of these collections with our first apply.
+Because these configurations use `for_each`, we need to target a few of these collections with our first apply.  To make this less painless, I've included a helper script for apply.
 
 ```
-terraform apply \
-  -target=tfe_team.visible_teams \
-  -target=tfe_workspace.run_triggering_workspaces \
-  -target=tfe_workspace.run_triggered_workspaces \
-  -auto-approve
+bin/apply
 ```
 
-Once this completes, you can proceed to a normal `terraform apply` workflow.
+and a companion script for destroy that helps when managing multiple environments
+
+```
+bin/destroy
+```
 
 ## Using it in other environments
 
@@ -70,29 +70,11 @@ Copy your existing `tfvars` file and update the `hostname` and `organization_nam
 
 Your new workspace provides a way to maintain state for a new environment separate from your existing usage against `tfe:local`.
 
-So you should now be able to start fresh against staging.  The only caveat is now that you have multiple `tfvars` files, you must specify which one you want to use.
-
-For example, with our first run:
+Then you can target the workspace you've created with:
 
 ```
-terraform apply \
-  -target=tfe_team.visible_teams \
-  -target=tfe_workspace.run_triggering_workspaces \
-  -target=tfe_workspace.run_triggered_workspaces \
-  -var-file="oasis.tfvars"
+bin/apply oasis
+bin/destroy oasis
 ```
 
-And then
-
-```
-terraform apply -var-file="oasis.tfvars"
-```
-
-### Switching between workspaces
-
-To switch back to your `tfe:local` workspace (default)
-
-```
-terraform workspace select default
-terraform apply -var-file="default.tfvars"
-```
+These scripts always switch you back to the `default` workspace and select the `default` workspace if none is provided
