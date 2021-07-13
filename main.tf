@@ -1,6 +1,13 @@
+terraform {
+  required_providers {
+    tfe = {
+      version  = "~> 0.23.0"
+    }
+  }
+}
+
 provider "tfe" {
   hostname = var.hostname
-  version  = "~> 0.23.0"
 }
 
 data "tfe_organization_membership" "user" {
