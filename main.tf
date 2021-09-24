@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     tfe = {
-      version  = "~> 0.23.0"
+      version  = "~> 0.26.0"
     }
   }
 }
@@ -35,4 +35,28 @@ resource "tfe_workspace" "workspace" {
     branch         = var.branch
     oauth_token_id = tfe_oauth_client.oauth.oauth_token_id
   }
+}
+
+resource "tfe_workspace" "tagged_vcs" {
+  organization      = var.organization_name
+  name              = "tagged_vcs"
+  auto_apply        = true
+  queue_all_runs    = true
+  working_directory = var.working_directory
+  tag_names         = ["prod", "application", "useast1"]
+
+  vcs_repo {
+    identifier     = var.repo
+    branch         = var.branch
+    oauth_token_id = tfe_oauth_client.oauth.oauth_token_id
+  }
+}
+
+resource "tfe_workspace" "tagged" {
+  organization      = var.organization_name
+  name              = "tagged"
+  auto_apply        = true
+  queue_all_runs    = true
+  working_directory = var.working_directory
+  tag_names         = ["dev", "infra", "useast1"]
 }
