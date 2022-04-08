@@ -21,7 +21,3 @@ variable "branch" {
 variable "repo" {
   type = string
 }
-
-variable "working_directory" {
-  type = string
-}
