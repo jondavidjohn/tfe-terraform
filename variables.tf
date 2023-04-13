@@ -10,6 +10,10 @@ variable "github_oauth_token" {
   type = string
 }
 
+variable "tfe_token" {
+  type = string
+}
+
 variable "user_email" {
   type = string
 }
