@@ -4,7 +4,7 @@ resource "tfe_workspace" "drift_admin_workspace" {
   auto_apply          = true
   queue_all_runs      = true
   assessments_enabled = true
-  terraform_version   = "1.5.0-alpha20230405"
+  terraform_version   = "1.5.0"
 
   vcs_repo {
     identifier     = "jondavidjohn/drift-admin"
